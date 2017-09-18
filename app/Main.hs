@@ -24,14 +24,17 @@ compareS o (d,x) = case d of
     1 -> "Draw"
     2 -> "Win"
     3 -> "Loose"
+    0 -> "Loose"
   2 -> case o of
     1 -> "Loose"
     2 -> "Draw"
     3 -> "Win"
+    0 -> "Loose"
   3 -> case o of
     1 -> "Win"
     2 -> "Loose"
     3 -> "Draw"
+    0 -> "Loose"
 
 toInt :: String -> Int
 toInt s = case s of
