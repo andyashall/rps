@@ -3,6 +3,9 @@ module Main where
 import Data.Char (toLower)
 import System.Random
 
+data Result = Bool | String
+  deriving(Show)
+
 main :: IO ()
 main = do
   putStrLn "Rock, Paper or Scissors?"
@@ -15,14 +18,27 @@ main = do
   let m = result r i d
   print m
 
-compareS :: Int -> (Int, StdGen) -> Bool
-compareS o (d,x) = o == d
+compareS :: Int -> (Int, StdGen) -> String
+compareS o (d,x) = case d of 
+  1 -> case o of
+    1 -> "Draw"
+    2 -> "Win"
+    3 -> "Loose"
+  2 -> case o of
+    1 -> "Loose"
+    2 -> "Draw"
+    3 -> "Win"
+  3 -> case o of
+    1 -> "Win"
+    2 -> "Loose"
+    3 -> "Draw"
 
 toInt :: String -> Int
 toInt s = case s of
   "rock" -> 1
   "paper" -> 2
   "scissors" -> 3
+  _ -> 0 
 
 toStr :: Int -> String
 toStr i = case i of
@@ -33,7 +49,8 @@ toStr i = case i of
 lowerString :: [Char] -> String
 lowerString str = [ toLower loweredString | loweredString <- str]
 
-result :: Bool -> Int -> (Int, StdGen) -> String
-result r i (d,x) = case r of
-  True -> "You win! Dealer was: " ++ (show $ toStr d)
-  False -> "You loose! Dealer was: " ++ (show $ toStr d)
+result :: String -> (Int, StdGen) -> String
+result r (d,x) = case r of
+  "Win" -> "You win! Dealer was: " ++ (show $ toStr d)
+  "Loose" -> "You loose! Dealer was: " ++ (show $ toStr d)
+  "Draw" -> "You Draw! Dealer was: " ++ (show $ toStr d)
