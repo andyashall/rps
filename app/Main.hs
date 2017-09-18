@@ -15,7 +15,7 @@ main = do
   let l = lowerString o
   let i = toInt l
   let r = compareS i d
-  let m = result r i d
+  let m = result r d
   print m
 
 compareS :: Int -> (Int, StdGen) -> String
@@ -50,7 +50,4 @@ lowerString :: [Char] -> String
 lowerString str = [ toLower loweredString | loweredString <- str]
 
 result :: String -> (Int, StdGen) -> String
-result r (d,x) = case r of
-  "Win" -> "You win! Dealer was: " ++ (show $ toStr d)
-  "Loose" -> "You loose! Dealer was: " ++ (show $ toStr d)
-  "Draw" -> "You Draw! Dealer was: " ++ (show $ toStr d)
+result r (d,x) = "You " ++ (id $ r) ++ "! Dealer was: " ++ (id $ toStr d)
